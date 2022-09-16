@@ -17,7 +17,15 @@ from django.contrib import admin
 from django.urls import path, include
 
 urlpatterns = [
-    path('',include('distancelearningapp.urls')),
-    path('contact/', include('distancelearningapp.urls')),
-    path('admin/', admin.site.urls)
+    path('', include('distancelearningapp.urls')),
+    path('admin/', admin.site.urls),
+    path('account/register', include('distancelearningapp.urls')),
+    path('account/login', include('distancelearningapp.urls')),
+    path('logout', include('distancelearningapp.urls')),
+    path('account/dashboard', include('distancelearningapp.urls')),
+    path('account/profile', include('distancelearningapp.urls')),
+    path('updateprofile/<str:pk>', include('distancelearningapp.urls')),
+    # path('contact', include('distancelearningapp.urls')),    
+    path('account/course_details/<str:pk>/', include("distancelearningapp.urls")),
+    path('course_registration', include('distancelearningapp.urls'))
 ]

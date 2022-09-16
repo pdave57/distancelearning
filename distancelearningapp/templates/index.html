@@ -117,7 +117,7 @@
 
                <div class="col-md-offset-1 col-md-4 col-sm-12">
                     <div class="entry-form">
-                         <form action="#" method="post">
+                         {% comment %} <form action="#" method="post">
                               <h2>Signup today</h2>
                               <input type="text" name="full name" class="form-control" placeholder="Full name" required="">
 
@@ -126,7 +126,12 @@
                               <input type="password" name="password" class="form-control" placeholder="Your password" required="">
 
                               <button class="submit-btn form-control" id="form-submit">Get started</button>
-                         </form>
+                         </form> {% endcomment %}
+                         <p>You can start your distance by applying through this app</p>
+                         <p>We have professional teaching and you can do certification with us</p>
+                         <p>Our course are affordable and with short duration</p>
+                         <p>We under hands on deck kind of traing</p>
+                         <a href="{% url 'account/login' %}" class="submit-btn form-control" id="form-submit">Get started</a>
                     </div>
                </div>
 
@@ -219,6 +224,7 @@
 
 
 <!-- Courses -->
+
 <section id="courses">
      <div class="container">
           <div class="row">
@@ -231,38 +237,42 @@
 
                     <div class="owl-carousel owl-theme owl-courses">
                         <!--our dynamic content-->
-                        {% for item in items%}
+                       
+                        {%for a in authors%}
                          <div class="col-md-4 col-sm-4">
                               <div class="item">
                                    <div class="courses-thumb">
+                                        
                                         <div class="courses-top">
                                              <div class="courses-image">
-                                                  <img src="{%static 'images/courses-image1.jpg'%}" class="img-responsive" alt="">
+                                                  <img src="{{a.courses.course_pic.url}}" class="img-responsive" alt="">
                                              </div>
                                              <div class="courses-date">
-                                                  <span><i class="fa fa-calendar"></i> 12 / 7 / 2018</span>
-                                                  <span><i class="fa fa-clock-o"></i> 7 Hours</span>
+                                                  <span><i class="fa fa-calendar"></i> {{a.courses.start_date}}</span>
+                                                  <span><i class="fa fa-clock-o"></i> {{a.courses.duration}}</span>
                                              </div>
                                         </div>
 
                                         <div class="courses-detail">
-                                             <h3><a href="#">Social Media Management</a></h3>
-                                             <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-                                        </div>
-
+                                             <h3><a href="{% url 'account/course_details' a.courses.id%}">{{a.courses.courseTitle}}</a></h3>
+                                             <p>{{a.courses.description}}</p>
+                                        </div>                                     
+                                    
                                         <div class="courses-info">
                                              <div class="courses-author">
-                                                  <img src="{%static 'images/author-image1.jpg'%}" class="img-responsive" alt="">
-                                                  <span>Mark Wilson</span>
+                                                  <img src="{{a.author_pic.url}}" class="img-responsive" alt="">
+                                                  <span>{{a.author}}</span>
                                              </div>
                                              <div class="courses-price">
-                                                  <a href="#"><span>USD 25</span></a>
+                                                  <a href="#"><span>{{a.price}}</span></a>
                                              </div>
                                         </div>
+                                     
                                    </div>
                               </div>
                          </div>
-                         {% endfor %}
+                         {%endfor%}
+                        
                          <!--end dynamic-->                        
 
                     </div>
@@ -286,7 +296,7 @@
                          <div class="col-md-4 col-sm-4">
                               <div class="item">
                                    <div class="tst-image">
-                                        <img src="{%static 'images/tst-image1.jpg'%}" class="img-responsive" alt="">
+                                        <img src="{{c.course_pic.url}}" class="img-responsive" alt="">
                                    </div>
                                    <div class="tst-author">
                                         <h4>Jackson</h4>
