@@ -25,8 +25,8 @@ urlpatterns = [
     path('account/dashboard', include('distancelearningapp.urls')),
     path('profile', include('distancelearningapp.urls')),
     path('updateprofile/<str:pk>/', include('distancelearningapp.urls')),
-    path('delete_profile/<str:pk>/', include('distancelearningapp.url')),
-    # path('contact', include('distancelearningapp.urls')),    
+    path('delete_profile/<str:pk>/', include('distancelearningapp.urls')),        
     path('account/course_details/<str:pk>/', include("distancelearningapp.urls")),
     path('course_registration', include('distancelearningapp.urls'))
+    # path('contact', include('distancelearningapp.urls')),
 ]

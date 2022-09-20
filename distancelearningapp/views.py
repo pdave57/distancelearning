@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from django.forms import inlineformset_factory
 from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login, logout
@@ -13,12 +14,12 @@ def index(request):
     context = {"authors":authors}
     return render(request, 'index.html', context)
 
-@login_required(login_url='/account/loginpage')
+@login_required(login_url='/account/login')
 def dashboard(request):
     username = request.session['username']
     user = User.objects.get(username = username)
     profile = Profile.objects.filter(user_id=user.id).all()
-    reg = Registercourses.objects.select_relatected('courses').filter(user_id=user.id)
+    reg = Registercourses.objects.select_related('courses').filter(user_id=user.id)
     context = {'profile':profile, 'reg':reg}        
     return render(request, 'account/dashboard.html', context)
 
@@ -99,7 +100,7 @@ def course_registration(request):
 def update_course_registration(request):
     return render(request, "account/course_registration.html")
 
-@login_required(login_url='/account/loginpage')
+@login_required(login_url='/account/login')
 def course_detail(request, pk):
     profile = Authors.objects.select_related('courses').filter(id=pk)
     context = {"profile":profile}
